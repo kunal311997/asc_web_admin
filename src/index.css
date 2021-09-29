@@ -1,13 +1,316 @@
+@font-face {
+  font-family: Spinnaker;
+  src: url("../src/abeezee-v14-latin-regular.woff");
+}
+
+:root {
+  --clr-inside: #212529;
+  --clr-background: #272b2f;
+  --clr-inside-light: #2a2e32;
+  --clr-orange: #ff6f00;
+  --clr-outside: #3d434b;
+
+  --clr-grey-1: #9c9c9c;
+  --clr-grey-2: #595959;
+  --clr-grey-3: #d8d8d8;
+  --clr-grey-light: #202020;
+  --clr-grey-dark: #181818;
+  --clr-grey-lighter: #303030;
+  --clr-white: #ffffff;
+  --clr-blue1: #267dff;
+  --clr-blue2: #0a369d;
+  --clr-blue3: #e1edf6;
+  --clr-orange-dark: #eb480b;
+  --clr-transparent-blue: #0a369d65;
+  --clr-text-gery: #9c9ea0;
+
+  --desktop: "1200px";
+  --laptop: "992px";
+  --tablet: "768px";
+  --mobile: "480px";
+  background-color: var(--clr-background);
+}
+
+* {
+  font-family: Spinnaker;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.appIcon {
+  height: 10rem;
+  width: 10rem;
+}
+.full_height_div {
+  height: 100vh;
+  background-color: var(--clr-background);
+}
+
+.full_height_div_home {
+  height: 100%;
+  background-color: var(--clr-background);
+  display: flex;
+  flex-direction: column;
+}
+.bg_blue_div {
+  height: 14rem;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg_white_card_div {
+  position: absolute;
+  top: 16rem;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.1);
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 1.2rem;
+  align-content: center;
+  background-color: var(--clr-inside);
+  border-radius: 20px;
+}
+
+.bg_white_card_div > h1 {
+  text-align: center;
+  color: white;
+}
+
+.bg_white_card_div > input {
+  padding: 12px;
+  outline: none;
+  border-radius: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+  align-self: center;
+  border-color: var(--clr-background);
+  border-style: solid;
+  background-color: var(--clr-inside-light);
+  width: 20rem;
+  margin-top: 1rem;
+  color: var(--clr-text-gery);
+}
+input {
+  -webkit-box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.bg_white_card_div > button {
+  margin-top: 40px;
+  border-radius: 25px;
+  background-color: var(--clr-orange);
+  color: var(--clr-white);
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 10px;
+  width: 15rem;
+  border-color: var(--clr-orange);
+  align-self: center;
+  /* min-width: 190px; */
+}
+
+.sidenav {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--clr-inside);
+  transition: 0.5s ease;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.menu-bars {
+  font-size: 1.2rem;
+  background: none;
+  cursor: pointer;
+  padding: 0.6rem;
+  align-self: flex-start;
+  color: white;
+}
+
+.sidenav a {
+  cursor: pointer;
+  color: black;
+  font-size: 16px;
+  transition: 0.3s;
+  padding: 0.5rem 0.5rem;
+  flex-wrap: wrap;
+  display: inline-block;
+  justify-content: flex-start;
+  text-decoration: none;
+  text-align: left;
+}
+
+.drawer_icons {
+  margin-right: 0.8rem;
+  margin-left: 0.1rem;
+}
+
+.home {
+  margin-left: 3rem;
+  margin-right: 1rem;
+  transition: margin-left 0.5s;
+  flex-grow: 1;
+  height: 100vh;
+}
+
+.question {
+  display: flex;
+  flex-direction: row;
+  color: white;
+}
+
+.questionMain {
+  box-shadow: 0px 5px 5px 2px rgba(0, 0, 0, 0.1);
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--clr-text-gery);
+  background-color: var(--clr-inside);
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.questionMain > h5 {
+  margin: 0px;
+}
+.button {
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  align-self: center;
+  text-align: center;
+  background-color: var(--clr-orange);
+  font-size: 0.8rem;
+  border-color: transparent;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.header {
+  background-color: black;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  padding: 0.6rem;
+  color: white;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+.answer {
+  padding: 0.5rem 0.5rem;
+  align-self: flex-start;
+  min-width: 70%;
+  max-width: 95%;
+  width: 100%;
+  height: 30%;
+  min-height: 40%;
+  margin: 0px;
+  margin-top: 0.5rem;
+  resize: vertical;
+  border-color: black;
+  border-radius: 10px;
+  outline: none;
+}
+
+.label {
+  margin: 0px;
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: var(--clr-grey-2);
+}
+
+.belowLabel {
+  margin: 0px;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.question-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding-bottom: 20px;
+}
+
+.checkboxContainer {
+  margin: 0px;
+  margin-top: 0.5rem;
+}
+
+.checkBoxItem {
+  font-size: 1rem;
+}
+
+.actionButtonsContainer {
+  display: flex;
+  justify-content: center;
+}
+.loader {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.425);
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 70%;
+  }
+
+  .bg_white_card_div {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .bg_white_card_div > input {
+    width: 15rem;
+  }
 }
