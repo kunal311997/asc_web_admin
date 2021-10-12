@@ -207,8 +207,10 @@ input {
   flex-direction: column;
   flex-wrap: wrap;
 }
-.questionMain > h5 {
+.questionMain > p {
   margin: 0px;
+  word-spacing: -2px;
+  font-size: 0.9em;
 }
 .button {
   align-items: center;
@@ -235,6 +237,7 @@ input {
   position: sticky;
   top: 0;
 }
+
 .answer {
   padding: 0.5rem 0.5rem;
   align-self: flex-start;
@@ -242,34 +245,40 @@ input {
   max-width: 95%;
   width: 100%;
   height: 30%;
-  min-height: 40%;
-  margin: 0px;
-  margin-top: 0.5rem;
+  min-height: 25%;
   resize: vertical;
-  border-color: black;
   border-radius: 10px;
   outline: none;
+  border-color: var(--clr-background);
+  border-style: solid;
+  background-color: var(--clr-inside);
+  margin-top: 2rem;
+  color: var(--clr-text-gery);
 }
 
 .label {
   margin: 0px;
   margin-top: 2rem;
   font-size: 1rem;
-  color: var(--clr-grey-2);
+  color: var(--clr-text-gery);
 }
 
 .belowLabel {
   margin: 0px;
-  margin-top: 0.5rem;
-  font-size: 1rem;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: white;
 }
 
 .question-container {
   display: flex;
   flex-direction: column;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  /* margin-left: 2rem;
+  margin-right: 2rem; */
   padding-bottom: 20px;
+  background-color: var(--clr-background);
+  height: 100%;
+  min-height: 100%;
 }
 
 .checkboxContainer {
@@ -283,7 +292,6 @@ input {
 
 .actionButtonsContainer {
   display: flex;
-  justify-content: center;
 }
 .loader {
   position: absolute;
@@ -298,6 +306,38 @@ input {
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.425);
   height: 100%;
+}
+
+.dialog {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 10rem; /* Location of the box */
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.dialog-content {
+  display: flex;
+  padding: 1rem;
+  margin: 4rem;
+  background-color: var(--clr-background);
+  border-radius: 10px;
+  flex-direction: column;
+  font-size: 0.6rem;
+  color: white;
+  flex-wrap: wrap;
+  white-space: pre-wrap;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 @media screen and (max-width: 768px) {

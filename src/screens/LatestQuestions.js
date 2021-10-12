@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 export default function LatestQuestions({ onQuestionClicked, sidebar }) {
 
@@ -68,25 +69,36 @@ export default function LatestQuestions({ onQuestionClicked, sidebar }) {
         }
     ]
 
+
+    const onTakeOverClicked = (index) => {
+        console.log(index)
+    }
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <h1 style={{ display: 'flex', justifyContent: 'center', color: 'white' }}>
+            <h1 style={{ display: 'flex', color: 'white' }}>
                 Latest Questions</h1>
             {
                 questionsList.map((question, index) => (
-                    <div key={index} className="questionMain">
+                    <div key={index} className="questionMain"
+                    onClick={() => onQuestionClicked(questionsList[index])}>
 
-                        <h5>{question.date}</h5>
+                        <p>{question.date}</p>
 
                         <div className='question'  >
-                            <h4 style={{ flex: '1' }}
+                            <p style={{
+                                flex: '1',
+                                fontSize: '1.05rem',
+                                color: '#f5d678',
+                                fontWeight: 'bold',
+                                marginRight: '0.1rem'
+                            }}
                                 key={index}
-                                onClick={() => onQuestionClicked(questionsList[index])}>
-                                {question.title}</h4>
+                               >
+                                {question.title}</p>
                             <button className='button'>Take Over</button>
                         </div>
 
-                        <h5>Asked by : {question.askedBy} from : {question.location}</h5>
+                        <p>Asked by <b>{question.askedBy}</b>,  {question.location}</p>
 
                     </div>
 

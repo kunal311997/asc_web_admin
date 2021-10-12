@@ -7,12 +7,14 @@ import { Redirect } from 'react-router';
 import * as constants from '../constants/AppConstants';
 import appIcon from '../assets/app_icon.png'
 import Loader from '../components/Loader';
+import QuestionDetails from "./QuestionDetails";
 
 
 export default function HomePage() {
 
     const [sidebar, setSidebar] = useState(true);
     const [isLoading, setIsLoading] = useState(true)
+    const [isDialogOpened, setIsDialogOpened] = useState(false)
 
     const history = useHistory();
 
@@ -21,8 +23,18 @@ export default function HomePage() {
         setIsLoading(false)
     }.bind(this), 2000)
 
+    const onDialogButtonClicked = (value) => {
+        console.log(value)
+        if (value === "yes") {
+            history.replace("/")
+            localStorage.clear()
+        } else {
+            setIsDialogOpened(false)
+        }
+    }
+
     const onSignout = () => {
-        history.replace("/")
+        setIsDialogOpened(true)
     }
 
     const onQuestionClicked = (item) => {
@@ -43,13 +55,18 @@ export default function HomePage() {
         <Router>
             <div className="full_height_div_home" >
                 {isLoading && <Loader />}
-                <SideNav showSidebar={showSidebar} sidebar={sidebar} onSignout={onSignout} />
+                <SideNav
+                    showSidebar={showSidebar}
+                    sidebar={sidebar}
+                    onSignout={onSignout}
+                    onDialogButtonClicked={onDialogButtonClicked}
+                    isDialogOpened={isDialogOpened} />
+
                 <div className="header">
                     <img className='appIcon'
                         style={{ height: '3rem', width: '3rem' }}
                         src={appIcon} />
                     Astro-Study Booster
-
                 </div>
 
                 <div className="home" style={{

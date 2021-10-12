@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as CgIcons from 'react-icons/cg';
-import * as AiIcons from 'react-icons/ai';
 import * as RiIcons from 'react-icons/ri';
 import { Link, useHistory } from "react-router-dom";
-import { root } from '../index.js'
-export default function SideNav({ sidebar, showSidebar, onSignout }) {
+import Dialog from '../components/Dialog';
+export default function SideNav({ sidebar, showSidebar, onSignout, onDialogButtonClicked, isDialogOpened }) {
     const history = useHistory();
-
 
     const sideBarInitialData = [
         {
@@ -37,7 +35,7 @@ export default function SideNav({ sidebar, showSidebar, onSignout }) {
         {
             title: 'Sign Out',
             icon: <FaIcons.FaSignOutAlt className='drawer_icons' />,
-            path: '',
+            path: '/home',
             isSelected: false
         }
     ]
@@ -58,7 +56,6 @@ export default function SideNav({ sidebar, showSidebar, onSignout }) {
         console.log(sideBarData)
 
         if (sideBarData[selectedIndex].title == 'Sign Out') {
-            localStorage.clear()
             onSignout()
         }
     }
@@ -67,13 +64,17 @@ export default function SideNav({ sidebar, showSidebar, onSignout }) {
         <div className='sidenav' style={{
             width: sidebar ? '2.4rem' : '13rem'
         }}>
+            <Dialog title="Are you sure you want to Sign Out? "
+                onDialogButtonClicked={onDialogButtonClicked}
+                isDialogOpened={isDialogOpened} />
+
             <FaIcons.FaBars className='menu-bars' onClick={showSidebar} />
             {sideBarData.map((item, index) => {
                 return (
                     <div key={index} style={{ backgroundColor: item.isSelected ? '#3d434b' : '#212529' }}
                         onClick={() => onItemClicked(index)}>
                         <Link to={item.path}>
-                            <div style={{ color:'white',display: 'flex' }}>
+                            <div style={{ color: 'white', display: 'flex' }}>
                                 {item.icon}   {item.title}
                             </div>
                         </Link>
