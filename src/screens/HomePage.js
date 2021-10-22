@@ -1,84 +1,109 @@
 import SideNav from "../components/SideNav";
 import LatestQuestions from "./LatestQuestions";
-import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
 import PastQuestions from "./PastQuestions";
 import { useState } from "react";
-import { Redirect } from 'react-router';
-import * as constants from '../constants/AppConstants';
-import appIcon from '../assets/app_icon.png'
-import Loader from '../components/Loader';
-
+import { Redirect } from "react-router";
+import * as constants from "../constants/AppConstants";
+import appIcon from "../assets/app_icon.png";
+import Loader from "../components/Loader";
 
 export default function HomePage() {
+  const [sidebar, setSidebar] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDialogOpened, setIsDialogOpened] = useState(false);
 
-    const [sidebar, setSidebar] = useState(true);
-    const [isLoading, setIsLoading] = useState(true)
+  const history = useHistory();
+  setTimeout(function () {
+    //Start the timer
+    console.log("3000");
+    setIsLoading(false);
+  }, 2000);
 
-    const history = useHistory();
-
-    setTimeout(function () { //Start the timer
-        console.log("3000")
-        setIsLoading(false)
-    }.bind(this), 2000)
-
-    const onSignout = () => {
-        history.replace("/")
+  const onDialogButtonClicked = (value) => {
+    console.log(value);
+    if (value === "yes") {
+      history.replace("/");
+      localStorage.clear();
+    } else {
+      setIsDialogOpened(false);
     }
+  };
 
-    const onQuestionClicked = (item) => {
-        history.push("/questionDetails", item);
-    }
+  const onSignout = () => {
+    setIsDialogOpened(true);
+  };
 
-    const showSidebar = () => {
-        setSidebar(!sidebar);
-    }
+  const onQuestionClicked = (item) => {
+    history.push("/questionDetails", item);
+  };
 
-    let isLoggedIn = localStorage.getItem(constants.IS_USER_LOGGED_IN)
-    console.log(isLoggedIn);
-    if (isLoggedIn === null) {
-        return <Redirect to='/' />
-    }
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+  };
 
-    return <>
-        <Router>
-            <div className="full_height_div_home" >
-                {isLoading && <Loader />}
-                <SideNav showSidebar={showSidebar} sidebar={sidebar} onSignout={onSignout} />
-                <div className="header">
-                    <img className='appIcon'
-                        style={{ height: '3rem', width: '3rem' }}
-                        src={appIcon} />
-                    Astro-Study Booster
+  let isLoggedIn = localStorage.getItem(constants.IS_USER_LOGGED_IN);
+  console.log(isLoggedIn);
+  if (isLoggedIn === null) {
+    return <Redirect to="/" />;
+  }
 
-                </div>
+  return (
+    <>
+      <Router>
+        <div className="full_height_div_home">
+          {isLoading && <Loader />}
+          <SideNav
+            showSidebar={showSidebar}
+            sidebar={sidebar}
+            onSignout={onSignout}
+            onDialogButtonClicked={onDialogButtonClicked}
+            isDialogOpened={isDialogOpened}
+          />
 
-                <div className="home" style={{
-                    marginLeft: sidebar ? '3rem' : '15rem',
-                    marginRight: sidebar ? '1rem' : '-12rem',
-                }}>
-                    <Switch>
-                        <Route
-                            path="/home"
-                            render={(props) =>
-                                <LatestQuestions
-                                    {...props}
-                                    sidebar={sidebar}
-                                    onQuestionClicked={onQuestionClicked} />}
-                        />
+          <div className="header">
+            <img
+              className="appIcon"
+              style={{ height: "3rem", width: "3rem" }}
+              src={appIcon}
+              alt="icon"
+            />
+            Astro-Study Booster
+          </div>
 
-                        <Route path={'/pastquestions'}
-                            component={PastQuestions} />
+          <div
+            className="home"
+            style={{
+              marginLeft: sidebar ? "3rem" : "15rem",
+              marginRight: sidebar ? "1rem" : "-12rem",
+            }}
+          >
+            <Switch>
+              <Route
+                path="/home"
+                render={(props) => (
+                  <LatestQuestions
+                    {...props}
+                    sidebar={sidebar}
+                    onQuestionClicked={onQuestionClicked}
+                  />
+                )}
+              />
 
-                        <Route path={'/myquestions'}
-                            component={PastQuestions} />
+              <Route path={"/pastquestions"} component={PastQuestions} />
 
-                        <Route path={'/myprofile'}
-                            component={PastQuestions} />
+              <Route path={"/myquestions"} component={PastQuestions} />
 
-                    </Switch>
-                </div>
-            </div>
-        </Router>
+              <Route path={"/myprofile"} component={PastQuestions} />
+            </Switch>
+          </div>
+        </div>
+      </Router>
     </>
-
+  );
 }
