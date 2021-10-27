@@ -3,7 +3,7 @@ import * as FaIcons from "react-icons/fa";
 import * as CgIcons from "react-icons/cg";
 import * as RiIcons from "react-icons/ri";
 import { Link } from "react-router-dom";
-import Dialog from "../components/Dialog";
+import SignOutDialog from "./SignOutDialog";
 
 export default function SideNav({
   sidebar,
@@ -22,7 +22,7 @@ export default function SideNav({
     {
       title: "My Orders",
       icon: <FaIcons.FaRegListAlt className="drawer_icons" />,
-      path: "/myquestions",
+      path: "/myOrders",
       isSelected: false,
     },
     {
@@ -72,62 +72,7 @@ export default function SideNav({
 
     if (sideBarData[selectedIndex].title === "Sign Out") {
       onSignout();
-      const onItemClicked = (selectedIndex) => {
-        setSideBarData(
-          sideBarData.map((sideBarItem, index) =>
-            index === selectedIndex
-              ? {
-                  ...sideBarItem,
-                  isSelected: true,
-                }
-              : {
-                  ...sideBarItem,
-                  isSelected: false,
-                }
-          )
-        );
-
-        console.log(sideBarData);
-
-        if (sideBarData[selectedIndex].title == "Sign Out") {
-          onSignout();
-        }
-      };
     }
-
-    return (
-      <div
-        className="sidenav"
-        style={{
-          width: sidebar ? "2.4rem" : "13rem",
-        }}
-      >
-        <Dialog
-          title="Are you sure you want to Sign Out? "
-          onDialogButtonClicked={onDialogButtonClicked}
-          isDialogOpened={isDialogOpened}
-        />
-
-        <FaIcons.FaBars className="menu-bars" onClick={showSidebar} />
-        {sideBarData.map((item, index) => {
-          return (
-            <div
-              key={index}
-              style={{
-                backgroundColor: item.isSelected ? "#3d434b" : "#212529",
-              }}
-              onClick={() => onItemClicked(index)}
-            >
-              <Link to={{ pathname: item.path, state: { title: item.title } }}>
-                <div style={{ color: "white", display: "flex" }}>
-                  {item.icon} {item.title}
-                </div>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
-    );
   };
   return (
     <div
@@ -136,7 +81,7 @@ export default function SideNav({
         width: sidebar ? "2.4rem" : "13rem",
       }}
     >
-      <Dialog
+      <SignOutDialog
         title="Are you sure you want to Sign Out? "
         onDialogButtonClicked={onDialogButtonClicked}
         isDialogOpened={isDialogOpened}

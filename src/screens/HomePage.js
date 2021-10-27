@@ -12,18 +12,22 @@ import { Redirect } from "react-router";
 import * as constants from "../constants/AppConstants";
 import appIcon from "../assets/app_icon.png";
 import Loader from "../components/Loader";
+import MyOrders from "./MyOrders";
 
 export default function HomePage() {
+  const history = useHistory();
   const [sidebar, setSidebar] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpened, setIsDialogOpened] = useState(false);
 
-  const history = useHistory();
   setTimeout(function () {
-    //Start the timer
-    console.log("3000");
     setIsLoading(false);
   }, 2000);
+
+  let isLoggedIn = localStorage.getItem(constants.IS_USER_LOGGED_IN);
+  if (isLoggedIn === null) {
+    return <Redirect to="/" />;
+  }
 
   const onDialogButtonClicked = (value) => {
     console.log(value);
@@ -46,12 +50,6 @@ export default function HomePage() {
   const showSidebar = () => {
     setSidebar(!sidebar);
   };
-
-  let isLoggedIn = localStorage.getItem(constants.IS_USER_LOGGED_IN);
-  console.log(isLoggedIn);
-  if (isLoggedIn === null) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <>
@@ -97,7 +95,7 @@ export default function HomePage() {
 
               <Route path={"/pastquestions"} component={PastQuestions} />
 
-              <Route path={"/myquestions"} component={PastQuestions} />
+              <Route path={"/myOrders"} component={MyOrders} />
 
               <Route path={"/myprofile"} component={PastQuestions} />
             </Switch>

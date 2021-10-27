@@ -1,6 +1,6 @@
 
 
-export default function Dialog({
+export default function SignOutDialog({
     title,
     onDialogButtonClicked,
     isDialogOpened

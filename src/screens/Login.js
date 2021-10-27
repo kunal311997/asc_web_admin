@@ -4,28 +4,24 @@ import appIcon from "../assets/app_icon.png";
 import * as AppConstants from "../constants/AppConstants";
 import { Redirect } from "react-router";
 import Loader from "../components/Loader";
-import ErrorPage from "./ErrorPage";
 
 export default function Login() {
   const history = useHistory();
-
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [buttonText, setButtonText] = useState(AppConstants.SEND_OTP);
   const [loginParams, setLoginParams] = useState({ email: "", pin: "" });
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    console.log(value);
-    setLoginParams({ ...loginParams, [name]: value });
-  };
-
   const isLoggedIn = localStorage.getItem(AppConstants.IS_USER_LOGGED_IN);
-  console.log(isLoggedIn);
   if (isLoggedIn) {
     return <Redirect to={AppConstants.HOME_PATH} />;
   }
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setLoginParams({ ...loginParams, [name]: value });
+  };
 
   const onLoginClick = (e) => {
     e.preventDefault();
@@ -37,8 +33,7 @@ export default function Login() {
         setButtonText("Verify");
         setLoginParams({ ...loginParams, pin: loginRes.pin });
       } else {
-        console.log(loginRes )
-        //return <ErrorPage/>
+        console.log(loginRes);
         alert("Error occured" + loginRes);
       }
       setIsLoading(false);
@@ -49,12 +44,14 @@ export default function Login() {
       console.log(pinVerifyRes);
       if (pinVerifyRes.pinValidity) {
         localStorage.setItem(AppConstants.IS_USER_LOGGED_IN, true);
+        localStorage.setItem(AppConstants.USER_TYPE, AppConstants.ADMIN);
         history.replace(AppConstants.HOME_PATH);
       } else {
         alert("Error occured" + pinVerifyRes);
       }
       setIsLoading(false);
     };
+
     if (isOtpSent) {
       callPinVerify();
       setIsLoading(true);
@@ -137,7 +134,6 @@ export default function Login() {
               backgroundColor: "#2a2e32",
             }}
           />
-
           <button type="submit" onClick={onLoginClick}>
             {buttonText}
           </button>
