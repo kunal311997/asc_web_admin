@@ -1,5 +1,5 @@
 // Api Urls
-export const BASE_URL = "http://astrostudybooster.com:5032/api/astrologer";
+export const BASE_URL = "http://astrostudycompanion.tech/api/astrologer";
 export const LOGIN_API_URL = BASE_URL + "/login";
 export const PIN_VERIFICATION_API_URL = BASE_URL + "/login/pinverification";
 

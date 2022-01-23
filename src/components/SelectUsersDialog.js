@@ -11,7 +11,6 @@ export default function SelectUsersDialog({
     <>
       {showDialog && (
         <div className="dialog" onClick={onDialogOutSideClicked}>
-          dfdf
           <div
             class="dialog-content"
             style={{ height: "30%", overflowY: "scroll", flexWrap: "nowrap" }}
