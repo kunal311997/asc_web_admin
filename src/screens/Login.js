@@ -126,7 +126,7 @@ export default function Login() {
             placeholder="6-digit OTP"
             value={loginParams.pin}
             onChange={handleChange}
-            maxlength="6"
+            maxLength="6"
             size="6"
             disabled={!isOtpSent ? true : false}
             style={{
